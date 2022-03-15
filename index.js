@@ -1,4 +1,3 @@
-
 function campoVacio(element, divError) {
   if(!element.value) {
     element.classList.add('is-invalid');
