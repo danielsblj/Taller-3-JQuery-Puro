@@ -2,7 +2,7 @@
 function campoVacio(element, divError) {
   if(!element.value) {
     element.classList.add('is-invalid');
-    document.getElementById(divError).innerHTML = 
+    $(`#${divError}`)[0].innerHTML = 
           `El campo de ${element.name} es requerido.`;
     return true;
   } else {
@@ -12,7 +12,7 @@ function campoVacio(element, divError) {
 }
 
 function genderValidation(masculino, femenino, divError) {
-  const container = document.getElementById(divError)
+  const container = $(`#${divError}`)[0]
   if(!masculino.checked && !femenino.checked) {
      container.classList.add('is-invalid');
      container.classList.remove('hidden');
@@ -24,10 +24,10 @@ function genderValidation(masculino, femenino, divError) {
   }
 }
 
-const experienciasCheckBox = document.getElementById('tieneExperiencia');
+const experienciasCheckBox = $('#tieneExperiencia')[0];
 // agrego un listener o escuchador
 experienciasCheckBox.addEventListener('change', function visibilidad (event) {
-  const contenedorExp = document.getElementById('contenedorExperiencias');
+  const contenedorExp = $('#contenedorExperiencias')[0];
   if(event.target.checked) {
     contenedorExp.classList.remove('invisible');
   } else {
@@ -36,7 +36,7 @@ experienciasCheckBox.addEventListener('change', function visibilidad (event) {
 })
 
 function getGenero () {
-  if(document.getElementById('masculino').checked) {
+  if($('#masculino')[0].checked) {
     return 'Masculino';
   } else {
     return 'Femenino';
@@ -46,7 +46,7 @@ function getGenero () {
 function validateStrLenght (input,event,divError) {
     if(input.value.length < 3 || input.value.length > 40) {
       input.classList.add('is-invalid');
-        document.getElementById(divError).innerHTML = 
+        $(`#${divError}`).innerHTML = 
           `El ${input.name} es requerido. Este Debe tener minimo 3 caracteres maximo 40`;
       return true;
     } else {
@@ -57,40 +57,40 @@ function validateStrLenght (input,event,divError) {
 
 // esta funcion me imprime los datos 
 const imprimirDatos = () => {
-  document.getElementById('inscription-form').classList.add('invisible');
-    document.getElementById('cardInformacion').classList.remove('invisible');
+  $('#inscription-form')[0].classList.add('invisible');
+  $('#cardInformacion')[0].classList.remove('invisible');
     // if ternario, u operacion ternaria o condicion ternaria
 
     // cammel case primera letra miniscula, a partir de ahi toda palabra que venga con primera letra en mayus
-    const tipoDoc = document.getElementById('documento').value === '1' ? 'Cedula de Ciudadania' : 'Tarjeta de identidad'
-    document.getElementById('textoTipoDocumento').innerHTML = 
+    const tipoDoc = $('#documento')[0].value === '1' ? 'Cedula de Ciudadania' : 'Tarjeta de identidad'
+      $('#textoTipoDocumento')[0].innerHTML = 
       `<span> Tipo Documento: ${tipoDoc} </span>`
-    document.getElementById('textoDocumento').innerHTML = 
-      `<span> Documento: ${document.getElementById('identification').value} </span>`
-      document.getElementById('textoNombre').innerHTML = 
-      `<span> Nombre: ${document.getElementById('name').value} </span>`
-      document.getElementById('textoApellido').innerHTML = 
-      `<span> Apellido: ${document.getElementById('lastName').value} </span>`
-      document.getElementById('textoCorreo').innerHTML = 
-      `<span> Correo: ${document.getElementById('correo').value} </span>`
-      document.getElementById('textoGenero').innerHTML = 
+      $('#textoDocumento')[0].innerHTML = 
+      `<span> Documento: ${$('#identification')[0].value} </span>`
+      $('#textoNombre')[0].innerHTML = 
+      `<span> Nombre: ${$('#name')[0].value} </span>`
+      $('#textoApellido')[0].innerHTML = 
+      `<span> Apellido: ${$('#lastName')[0].value} </span>`
+      $('#textoCorreo')[0].innerHTML = 
+      `<span> Correo: ${$('#correo')[0].value} </span>`
+      $('#textoGenero')[0].innerHTML = 
       `<span> Genero: ${getGenero()} </span>`
-      document.getElementById('textoProfesion').innerHTML = 
-      `<span> Profesión: ${document.getElementById('profesion').value} </span>`
+      $('#textoProfesion')[0].innerHTML = 
+      `<span> Profesión: ${$('#profesion')[0].value} </span>`
       let hobbiesTexto = '';
-      const hobbies = document.getElementsByClassName('hobbieCB');
+      const hobbies = $('.hobbieCB');
       for (const hobbie of hobbies) {
         if(hobbie.checked) {
           hobbiesTexto = ` ${hobbiesTexto} ${hobbie.value} ,`;
         }
       }
-      document.getElementById('textoHobbie').innerHTML = 
+      $('#textoHobbie')[0].innerHTML = 
         `<span> Hobbies: ${hobbiesTexto.slice(0, hobbiesTexto.length-1)} </span>`
-      document.getElementById('textoPerfil').innerHTML = 
-        `<span> Perfil: ${document.getElementById('perfil').value} </span>`
-      if(document.getElementById('tieneExperiencia').checked) {
-        document.getElementById('textoExperiencias').innerHTML = 
-          `<span> Experiencias: ${document.getElementById('experiencias').value} </span>`
+      $('#textoPerfil')[0].innerHTML = 
+        `<span> Perfil: ${$('#perfil')[0].value} </span>`
+      if($('#tieneExperiencia')[0].checked) {
+        $('#textoExperiencias')[0].innerHTML = 
+          `<span> Experiencias: ${$('#experiencias')[0].value} </span>`
       }
 }
 // propagacion de eventos
@@ -98,15 +98,15 @@ function validateMyCode(event) {
   event.preventDefault();
   let hayUnError = false;
 
-  if(campoVacio(document.getElementById('documento'), 'documentoError')){
+  if(campoVacio($('#documento')[0], 'documentoError')){
     hayUnError = true;
   } 
-  if(campoVacio(document.getElementById('identification'), 'identificacionError')){
+  if(campoVacio($('#identification')[0], 'identificacionError')){
     hayUnError = true;
   }
-  campoVacio(document.getElementById('correo'), 'correoError');
-  campoVacio(document.getElementById('profesion'), 'profesionError');
-  campoVacio(document.getElementById('perfil'), 'perfilError');
+  campoVacio($('#correo')[0], 'correoError');
+  campoVacio($('#profesion')[0], 'profesionError');
+  campoVacio($('#perfil')[0], 'perfilError');
   var male = $('#masculino')[0];
   var female = $('#femenino')[0];
   if(genderValidation(male, female,
@@ -114,23 +114,23 @@ function validateMyCode(event) {
   )) {
     hayUnError = true;
   }
-  const correo = document.getElementById('correo')
+  const correo = $('#correo')[0]
   if (validarCorreo(correo)) {
      correo.classList.remove('is-invalid');
   } else {
      hayUnError = true;
      correo.classList.add('is-invalid');
-     document.getElementById('correoError').innerHTML = 
+     $('#correoError')[0].innerHTML = 
             `El campo de correo es requerido o esta mal escrito.`;
   }
-  if(validateStrLenght(document.getElementById('name') , event, 'userNameError')){
+  if(validateStrLenght($('#name')[0] , event, 'userNameError')){
     hayUnError = true;
   }
-  if(validateStrLenght(document.getElementById('lastName'), event, 'userLastNameError')) {
+  if(validateStrLenght($('#lastName')[0], event, 'userLastNameError')) {
     hayUnError = true;
   }
 
-  const hobbiesError = document.getElementById('hobbiesError'); 
+  const hobbiesError = $('#hobbiesError')[0]; 
   if(validarHobbie()) {
     hobbiesError.classList.remove('is-invalid');
     hobbiesError.classList.add('hidden');
@@ -140,12 +140,12 @@ function validateMyCode(event) {
     hobbiesError.classList.remove('hidden');
   }
 
-  const tieneExperiencia= document.getElementById('tieneExperiencia');
-  const experiencias = document.getElementById('experiencias')
+  const tieneExperiencia= $('#tieneExperiencia')[0];
+  const experiencias = $('#experiencias')[0];
   if(tieneExperiencia.checked && experiencias.value === '') {
     hayUnError = true;
     experiencias.classList.add('is-invalid');
-    document.getElementById('experienciaError').innerHTML = 
+    $('#experienciaError')[0].innerHTML = 
             `El campo de correo es requerido o esta mal escrito.`;
   } else {
      experiencias.classList.remove('is-invalid');
@@ -163,7 +163,7 @@ const validarCorreo = (correo) => {
 }
 
 function validarHobbie() {
-  const hobbies = document.getElementsByClassName('hobbieCB');
+  const hobbies = $('.hobbieCB');
   for (const hobbie of hobbies) {
     if(hobbie.checked) {
       return true;
